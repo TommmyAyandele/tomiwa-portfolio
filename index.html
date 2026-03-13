@@ -1241,6 +1241,73 @@
   /* MOBILE FIRST RESPONSIVE DESIGN */
   /* Base mobile styles (320px and up) */
   @media (max-width: 767px) {
+    /* MOBILE TYPOGRAPHY FIXES */
+    :root {
+      --text-dim: #aaaaaa;
+      --muted: #888888;
+    }
+    
+    body {
+      font-size: 16px !important;
+    }
+    
+    p {
+      font-size: 16px !important;
+      line-height: 1.7 !important;
+    }
+    
+    /* Small text elements - minimum 13px */
+    .case-tag,
+    .cs-section-label,
+    .screen-frame-name,
+    .ba-url,
+    .hero-tag,
+    .nav-cta,
+    .marquee-inner,
+    .section-label,
+    .stat-label,
+    .work-tag {
+      font-size: 13px !important;
+      min-height: auto !important;
+    }
+    
+    /* Headings */
+    h1, .hero h1 {
+      font-size: clamp(2.2rem, 8vw, 4rem) !important;
+    }
+    
+    h2 {
+      font-size: clamp(1.8rem, 6vw, 3rem) !important;
+    }
+    
+    h3 {
+      font-size: clamp(1.4rem, 5vw, 2rem) !important;
+    }
+    
+    h4 {
+      font-size: clamp(1.2rem, 4vw, 1.6rem) !important;
+    }
+    
+    /* Annotation text */
+    .annotation-text p,
+    .ba-note-text {
+      font-size: 15px !important;
+      line-height: 1.7 !important;
+    }
+    
+    /* Override any rem/em that results in <14px */
+    * {
+      font-size: inherit !important;
+    }
+    
+    p, .annotation-text p, .ba-note-text {
+      font-size: 16px !important;
+    }
+    
+    .case-tag, .cs-section-label, .screen-frame-name, .ba-url, .hero-tag, .nav-cta, .marquee-inner, .section-label, .stat-label, .work-tag {
+      font-size: 13px !important;
+    }
+
     /* Navigation */
     nav {
       padding: 16px 20px;
@@ -1373,12 +1440,16 @@
 
     /* Featured Case Studies */
     .featured-case-inner {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr !important;
       min-height: auto;
     }
     .case-visual {
-      min-height: 240px;
-      padding: 40px 20px;
+      height: 220px !important;
+      width: 100% !important;
+      object-fit: cover !important;
+      min-height: 220px;
+      padding: 0 !important;
+      background: linear-gradient(135deg, #0d0d0a 0%, #1a1a14 50%, #0f0e0a 100%);
     }
     .ux-rival-mockup {
       max-width: 280px;
@@ -1390,7 +1461,8 @@
       padding: 4px 10px;
     }
     .case-content {
-      padding: 40px 20px;
+      padding: 20px !important;
+      width: 100%;
     }
     .case-meta {
       margin-bottom: 24px;
@@ -1459,6 +1531,10 @@
     .outcome-num {
       font-size: 2.2rem;
     }
+    .cs-grid-2 {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+    }
     .tech-stack {
       gap: 8px;
       margin-top: 16px;
@@ -1490,7 +1566,13 @@
     .screen-layout.flip {
       grid-template-columns: 1fr !important;
     }
+    .screen-frame img {
+      max-width: 100% !important;
+      height: auto !important;
+    }
     .annotation-list {
+      width: 100% !important;
+      overflow: visible !important;
       gap: 20px;
     }
     .annotation-item {
@@ -1522,6 +1604,9 @@
     }
     .ba-annotation-text {
       font-size: 0.75rem;
+    }
+    .ba-before-note, .ba-after-note {
+      grid-column: 2 !important;
     }
 
     /* Other Work Grid */
