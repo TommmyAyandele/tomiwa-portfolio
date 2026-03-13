@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <title>Promise Tomiwa Ayandele — Product Designer & Builder</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,14 +31,14 @@
 
   html { scroll-behavior: smooth; }
 
-  body {
+  html, body {
+    margin: 0; padding: 0;
     background: var(--black);
     color: var(--text);
     font-family: var(--font-sans);
     font-size: 16px;
     line-height: 1.6;
     overflow-x: hidden;
-    cursor: none;
   }
 
   /* Custom cursor */
@@ -131,6 +131,179 @@
     border-color: var(--gold-light);
   }
 
+  /* Hamburger Menu */
+  .hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .hamburger-menu:hover .hamburger-line {
+    background: var(--gold-bright);
+  }
+
+  .hamburger-menu.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger-menu.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-menu.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  /* Mobile Navigation */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(8, 8, 6, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 20px 40px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .mobile-nav-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    color: var(--gold);
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-close:hover {
+    background: rgba(212, 175, 83, 0.1);
+    color: var(--gold-bright);
+  }
+
+  .mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 16px 20px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-link:hover {
+    background: rgba(212, 175, 83, 0.1);
+    color: var(--gold);
+  }
+
+  .mobile-nav-sublink {
+    padding-left: 40px;
+    font-size: 1rem;
+    color: var(--text-dim);
+  }
+
+  .mobile-nav-sublink:hover {
+    color: var(--gold);
+  }
+
+  .mobile-nav-dropdown {
+    position: relative;
+  }
+
+  .mobile-nav-dropdown-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-dropdown-trigger:hover {
+    background: rgba(212, 175, 83, 0.1);
+    color: var(--gold);
+  }
+
+  .mobile-nav-caret {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-nav-dropdown.active .mobile-nav-caret {
+    transform: rotate(180deg);
+  }
+
+  .mobile-nav-dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .mobile-nav-dropdown.active .mobile-nav-dropdown-menu {
+    max-height: 300px;
+  }
+
   /* HERO */
   .hero {
     min-height: 100vh;
@@ -201,9 +374,115 @@
     font-weight: 400;
   }
   .hero-stats {
-    display: flex; gap: 50px;
-    flex-shrink: 0;
+    display: flex; gap: 40px;
+    margin-top: 20px;
   }
+
+  /* HERO VISUAL */
+  .hero-visual {
+    position: absolute;
+    top: 50%;
+    right: 60px;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 400px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .constellation-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .skill-node {
+    position: absolute;
+    background: var(--surface);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--gold);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    animation: nodeAppear 0.6s ease-out forwards;
+    animation-delay: var(--delay);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(212, 175, 83, 0.1);
+    left: var(--x);
+    top: var(--y);
+  }
+
+  .skill-node:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(212, 175, 83, 0.3);
+  }
+
+  @keyframes nodeAppear {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes nodeFloat {
+    0%, 100% {
+      transform: translate(-50%, -50%) translate(0, 0);
+    }
+    25% {
+      transform: translate(-50%, -50%) translate(3px, -2px);
+    }
+    50% {
+      transform: translate(-50%, -50%) translate(-2px, 3px);
+    }
+    75% {
+      transform: translate(-50%, -50%) translate(2px, 2px);
+    }
+  }
+
+  .skill-node {
+    animation: nodeAppear 0.6s ease-out forwards, nodeFloat 8s ease-in-out infinite;
+    animation-delay: var(--delay), calc(var(--delay) + 2s);
+  }
+
+  .constellation-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .constellation-line {
+    stroke: var(--gold);
+    stroke-width: 1;
+    opacity: 0.3;
+    stroke-dasharray: 2, 4;
+    animation: linePulse 4s ease-in-out infinite;
+  }
+
+  @keyframes linePulse {
+    0%, 100% {
+      opacity: 0.1;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      opacity: 0.4;
+      stroke-dashoffset: 6;
+    }
+  }
+
   .stat-item { text-align: right; }
   .stat-num {
     font-family: var(--font-display);
@@ -973,6 +1252,9 @@
     .nav-links {
       display: none;
     }
+    .hamburger-menu {
+      display: flex;
+    }
     .nav-cta {
       padding: 10px 16px;
       font-size: 0.65rem;
@@ -983,6 +1265,12 @@
     .hero {
       padding: 0 20px 60px;
       min-height: 90vh;
+      overflow-x: hidden;
+    }
+
+    /* Hero Visual - Mobile */
+    .hero-visual {
+      display: none;
     }
     .hero-tag {
       font-size: 0.6rem;
@@ -1033,6 +1321,7 @@
     /* Sections */
     section {
       padding: 80px 20px;
+      overflow-x: hidden;
     }
     .section-label {
       font-size: 0.58rem;
@@ -1342,6 +1631,14 @@
     .featured-case-inner { grid-template-columns: 1fr; }
     .case-visual { min-height: 320px; }
     .work-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 32px; width: 100%; justify-content: space-between; }
+    
+    /* Hero Visual - Tablet */
+    .hero-visual {
+      right: 32px;
+      width: 320px;
+      height: 320px;
+    }
     .outcome-grid { grid-template-columns: 1fr 1fr; }
     .cs-grid-2 { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
@@ -1363,6 +1660,14 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Promise<span>.</span></a>
+  
+  <!-- Mobile Hamburger Menu -->
+  <button class="hamburger-menu" id="hamburgerMenu" aria-label="Toggle navigation menu">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+  
   <ul class="nav-links">
     <li class="nav-dropdown-wrap">
       <a href="#work" class="nav-dropdown-trigger">Case Studies <span class="nav-caret">▾</span></a>
@@ -1378,6 +1683,28 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Let's talk →</a>
+  
+  <!-- Mobile Navigation Menu -->
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close navigation menu">✕</button>
+    <ul class="mobile-nav-links">
+      <li><a href="#about" class="mobile-nav-link">About</a></li>
+      <li><a href="#work" class="mobile-nav-link">Work</a></li>
+      <li class="mobile-nav-dropdown">
+        <button class="mobile-nav-dropdown-trigger" id="mobileCaseStudiesTrigger">
+          Case Studies <span class="mobile-nav-caret">▾</span>
+        </button>
+        <ul class="mobile-nav-dropdown-menu" id="mobileCaseStudiesMenu">
+          <li><a href="#cs-uxrival" class="mobile-nav-link mobile-nav-sublink">UX Rival</a></li>
+          <li><a href="#cs-proc360" class="mobile-nav-link mobile-nav-sublink">Proc360 V2</a></li>
+          <li><a href="#cs-dra" class="mobile-nav-link mobile-nav-sublink">DRA2020 Redesign</a></li>
+        </ul>
+      </li>
+      <li><a href="#philosophy" class="mobile-nav-link">Thinking</a></li>
+      <li><a href="#storytelling" class="mobile-nav-link">@techwithtomiwa</a></li>
+      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+    </ul>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -1392,6 +1719,21 @@
     <em>Tomiwa</em><br />
     <span class="outline">Ayandele</span>
   </h1>
+
+  <!-- DYNAMIC HERO VISUAL -->
+  <div class="hero-visual fade-up fade-up-delay-2" id="heroVisual">
+    <div class="constellation-container">
+      <div class="skill-node" data-skill="Design" style="--x: 20%; --y: 25%; --delay: 0s;">🎨 Design</div>
+      <div class="skill-node" data-skill="AI" style="--x: 70%; --y: 15%; --delay: 1s;">🤖 AI</div>
+      <div class="skill-node" data-skill="Fintech" style="--x: 85%; --y: 60%; --delay: 2s;">💳 Fintech</div>
+      <div class="skill-node" data-skill="Africa" style="--x: 35%; --y: 75%; --delay: 3s;">🌍 Africa</div>
+      <div class="skill-node" data-skill="UX" style="--x: 15%; --y: 50%; --delay: 4s;">⚡ UX</div>
+      <div class="skill-node" data-skill="Data" style="--x: 60%; --y: 85%; --delay: 5s;">📊 Data</div>
+      <svg class="constellation-lines" id="constellationLines">
+        <!-- Lines will be drawn dynamically -->
+      </svg>
+    </div>
+  </div>
 
   <div class="hero-bottom fade-up fade-up-delay-2">
     <p class="hero-desc">
@@ -2484,7 +2826,14 @@
         <div class="work-card-num">03</div>
         <h4><em>Husridge</em></h4>
         <div class="work-card-sub">Co-founder · Product Design · 2023–Present</div>
-        <p>Talent management and booking marketplace for Africa's creative industry. I hold 50% equity and lead all product design — from the two-sided marketplace UX to the talent management dashboard. Currently at functional MVP and active market testing stage in Lagos.</p>
+        <p>Talent management and marketplace platform for Africa's creative industry — co-founded from scratch with 50% equity as product lead.</p>
+        <ul style="list-style: none; padding: 0; margin: 16px 0 0 0;">
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Designed full product from 0 to 1 — onboarding flows, talent profiles, booking systems, and client marketplace</li>
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Built stakeholder relationships in Lagos music talent management, validating product-market fit</li>
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Conducted founder research identifying challenges in Nigeria's informal operating culture</li>
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Professionally exited after co-founder misalignment, preserving relationships and learning from the journey</li>
+          <li style="margin-bottom: 0; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Founder chapter: learned to build, sell, and lead a product in unstructured African markets</li>
+        </ul>
         <div class="work-card-tags">
           <span class="work-card-tag">Marketplace</span>
           <span class="work-card-tag">Two-sided UX</span>
@@ -2496,7 +2845,14 @@
         <div class="work-card-num">04</div>
         <h4>Pay<em>onus</em></h4>
         <div class="work-card-sub">Payment Product Design · Fintech · Current</div>
-        <p>Leading payment product design at my current fintech role. Designing the full Payonus product experience — from payment flows and transaction history to onboarding and trust design. Working at the intersection of compliance constraints and delightful UX in the African payments context.</p>
+        <p>Fintech platform enabling merchants across 7 African countries to receive global payments — designing seamless cross-border transaction flows.</p>
+        <ul style="list-style: none; padding: 0; margin: 16px 0 0 0;">
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Designing end-to-end payment flows for multi-currency, multi-country money movement</li>
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Key project: OnUs Tag Transfer — instant payments using unique tags, reducing repeat friction</li>
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Working on merchant dashboards, transaction state design, and business onboarding</li>
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Balancing fintech compliance requirements with clean, trustworthy UX design</li>
+          <li style="margin-bottom: 0; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Mission: making Africa's payment infrastructure as seamless as global fintech standards</li>
+        </ul>
         <div class="work-card-tags">
           <span class="work-card-tag">Fintech</span>
           <span class="work-card-tag">Payments</span>
@@ -2656,6 +3012,89 @@
     el.addEventListener('mouseleave', function() { follower.classList.remove('hover'); });
   });
 
+  // Dynamic Constellation
+  function initConstellation() {
+    const container = document.querySelector('.constellation-container');
+    const svg = document.getElementById('constellationLines');
+    const nodes = document.querySelectorAll('.skill-node');
+    
+    if (!container || !svg || nodes.length === 0) return;
+
+    // Clear existing lines
+    svg.innerHTML = '';
+
+    // Create connections between nearby nodes
+    function createConnections() {
+      const connections = [];
+      
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const node1 = nodes[i];
+          const node2 = nodes[j];
+          
+          const rect1 = node1.getBoundingClientRect();
+          const rect2 = node2.getBoundingClientRect();
+          
+          const x1 = rect1.left + rect1.width / 2 - container.getBoundingClientRect().left;
+          const y1 = rect1.top + rect1.height / 2 - container.getBoundingClientRect().top;
+          const x2 = rect2.left + rect2.width / 2 - container.getBoundingClientRect().left;
+          const y2 = rect2.top + rect2.height / 2 - container.getBoundingClientRect().top;
+          
+          const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+          
+          // Connect nodes that are reasonably close
+          if (distance < 200) {
+            connections.push({ x1, y1, x2, y2, distance });
+          }
+        }
+      }
+      
+      // Sort by distance and limit connections
+      connections.sort((a, b) => a.distance - b.distance);
+      const maxConnections = Math.min(connections.length, 8);
+      
+      for (let i = 0; i < maxConnections; i++) {
+        const conn = connections[i];
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', conn.x1);
+        line.setAttribute('y1', conn.y1);
+        line.setAttribute('x2', conn.x2);
+        line.setAttribute('y2', conn.y2);
+        line.setAttribute('class', 'constellation-line');
+        line.style.animationDelay = `${i * 0.2}s`;
+        svg.appendChild(line);
+      }
+    }
+
+    // Initial connections
+    setTimeout(createConnections, 500);
+
+    // Recreate on window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(createConnections, 250);
+    });
+
+    // Add hover interactions
+    nodes.forEach(node => {
+      node.addEventListener('mouseenter', function() {
+        this.style.zIndex = '10';
+      });
+      
+      node.addEventListener('mouseleave', function() {
+        this.style.zIndex = '';
+      });
+    });
+  }
+
+  // Initialize constellation when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initConstellation);
+  } else {
+    initConstellation();
+  }
+
   // Scroll-triggered fade-up
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
@@ -2710,6 +3149,62 @@
       setTimeout(function() { expanded.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
     }
   }
+
+  // Hamburger Menu Functionality
+  const hamburgerMenu = document.getElementById('hamburgerMenu');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileNavClose = document.getElementById('mobileNavClose');
+  const mobileCaseStudiesTrigger = document.getElementById('mobileCaseStudiesTrigger');
+  const mobileCaseStudiesMenu = document.getElementById('mobileCaseStudiesMenu');
+  const mobileNavDropdown = mobileCaseStudiesTrigger.closest('.mobile-nav-dropdown');
+
+  // Toggle mobile menu
+  function toggleMobileMenu() {
+    const isOpen = mobileNav.classList.toggle('active');
+    hamburgerMenu.classList.toggle('active', isOpen);
+    
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  // Close mobile menu
+  function closeMobileMenu() {
+    mobileNav.classList.remove('active');
+    hamburgerMenu.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Toggle case studies submenu
+  function toggleMobileCaseStudies() {
+    const isOpen = mobileNavDropdown.classList.toggle('active');
+    mobileCaseStudiesMenu.style.maxHeight = isOpen ? '300px' : '0';
+  }
+
+  // Event listeners
+  hamburgerMenu.addEventListener('click', toggleMobileMenu);
+  mobileNavClose.addEventListener('click', closeMobileMenu);
+
+  // Close menu when clicking on a navigation link
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // Toggle case studies submenu
+  mobileCaseStudiesTrigger.addEventListener('click', toggleMobileCaseStudies);
+
+  // Close menu when pressing Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+      closeMobileMenu();
+    }
+  });
+
+  // Close menu when clicking outside (on mobile)
+  mobileNav.addEventListener('click', function(e) {
+    if (e.target === mobileNav) {
+      closeMobileMenu();
+    }
+  });
 </script>
 </body>
 </html>
