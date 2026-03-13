@@ -307,10 +307,29 @@
   /* HERO */
   .hero {
     min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: flex-end;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    grid-template-rows: 1fr auto;
+    gap: 40px;
     padding: 0 60px 80px;
     position: relative;
     overflow: hidden;
+  }
+
+  .hero-text-content {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-visual-container {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
   }
 
   .hero-bg-text {
@@ -375,17 +394,16 @@
   }
   .hero-stats {
     display: flex; gap: 40px;
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
   /* HERO VISUAL */
   .hero-visual {
     position: absolute;
-    top: 50%;
-    right: 60px;
-    transform: translateY(-50%);
-    width: 400px;
-    height: 400px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 1;
   }
@@ -1013,6 +1031,168 @@
     border-radius: 2px;
   }
 
+  /* RESUME SECTION */
+  .resume-header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .resume-header p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+  
+  .resume-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  
+  .resume-download-btn:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+  }
+
+  .resume-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .resume-left,
+  .resume-right {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+  }
+
+  .resume-section {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+  }
+  
+  .resume-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .resume-section-title {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  .resume-item {
+    margin-bottom: 40px;
+  }
+  
+  .resume-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .resume-item-header {
+    margin-bottom: 16px;
+  }
+
+  .resume-company {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 4px;
+  }
+
+  .resume-role {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .resume-date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .resume-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .resume-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    padding-left: 16px;
+    position: relative;
+  }
+  
+  .resume-bullets li:last-child {
+    margin-bottom: 0;
+  }
+
+  .resume-bullets li::before {
+    content: '▪';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  .resume-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .resume-content-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+  }
+
+  .resume-content-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .resume-content-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
   /* ABOUT SECTION */
   #philosophy { background: var(--surface); }
   .philosophy-wrap {
@@ -1333,6 +1513,13 @@
       padding: 0 20px 60px;
       min-height: 90vh;
       overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-visual-container {
+      display: none;
     }
 
     /* Hero Visual - Mobile */
@@ -1707,6 +1894,44 @@
       font-size: 0.6rem;
       min-width: 20px;
     }
+    
+    /* Resume Section - Mobile */
+    .resume-grid {
+      grid-template-columns: 1fr;
+      gap: 60px;
+    }
+    
+    .resume-left,
+    .resume-right {
+      gap: 40px;
+    }
+    
+    .resume-section {
+      padding-bottom: 30px;
+    }
+    
+    .resume-section-title {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+    }
+    
+    .resume-company {
+      font-size: 1.1rem;
+    }
+    
+    .resume-role {
+      font-size: 0.95rem;
+    }
+    
+    .resume-bullets li {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    
+    .resume-header p {
+      font-size: 1rem;
+      margin-bottom: 24px;
+    }
   }
 
   /* Tablet styles (768px - 1024px) */
@@ -1719,7 +1944,7 @@
     .hero-stats { gap: 32px; width: 100%; justify-content: space-between; }
     
     /* Hero Visual - Tablet */
-    .hero-visual {
+    .hero-visual-container {
       right: 32px;
       width: 320px;
       height: 320px;
@@ -1729,6 +1954,16 @@
     footer { flex-direction: column; gap: 12px; text-align: center; }
     nav { padding: 20px 32px; }
     .nav-links { display: none; }
+    
+    /* Resume Section - Tablet */
+    .resume-grid {
+      gap: 60px;
+    }
+    
+    .resume-left,
+    .resume-right {
+      gap: 50px;
+    }
   }
 
   /* Desktop styles (1025px and up) */
@@ -1762,10 +1997,11 @@
         <li><a href="#cs-dra"><span class="nav-drop-num">03</span>DRA2020 Redesign</a></li>
       </ul>
     </li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#philosophy">Thinking</a></li>
-    <li><a href="#storytelling">@techwithtomiwa</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" class="nav-link">About</a></li>
+    <li><a href="#resume" class="nav-link">Resume</a></li>
+    <li><a href="#work" class="nav-link">Work</a></li>
+    <li><a href="#philosophy" class="nav-link">Philosophy</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Let's talk →</a>
   
@@ -1774,6 +2010,7 @@
     <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close navigation menu">✕</button>
     <ul class="mobile-nav-links">
       <li><a href="#about" class="mobile-nav-link">About</a></li>
+      <li><a href="#resume" class="mobile-nav-link">Resume</a></li>
       <li><a href="#work" class="mobile-nav-link">Work</a></li>
       <li class="mobile-nav-dropdown">
         <button class="mobile-nav-dropdown-trigger" id="mobileCaseStudiesTrigger">
@@ -1797,45 +2034,49 @@
   <div class="hero-bg-text" aria-hidden="true">DESIGN</div>
   <div class="scroll-line"></div>
 
-  <div class="hero-tag fade-up">Product Designer & AI Builder — Lagos, NG</div>
+  <div class="hero-text-content fade-up">
+    <div class="hero-tag">Product Designer & AI Builder — Lagos, NG</div>
 
-  <h1 class="fade-up fade-up-delay-1">
-    Promise<br />
-    <em>Tomiwa</em><br />
-    <span class="outline">Ayandele</span>
-  </h1>
+    <h1 class="fade-up-delay-1">
+      Promise<br />
+      <em>Tomiwa</em><br />
+      <span class="outline">Ayandele</span>
+    </h1>
 
-  <!-- DYNAMIC HERO VISUAL -->
-  <div class="hero-visual fade-up fade-up-delay-2" id="heroVisual">
-    <div class="constellation-container">
-      <div class="skill-node" data-skill="Design" style="--x: 20%; --y: 25%; --delay: 0s;">🎨 Design</div>
-      <div class="skill-node" data-skill="AI" style="--x: 70%; --y: 15%; --delay: 1s;">🤖 AI</div>
-      <div class="skill-node" data-skill="Fintech" style="--x: 85%; --y: 60%; --delay: 2s;">💳 Fintech</div>
-      <div class="skill-node" data-skill="Africa" style="--x: 35%; --y: 75%; --delay: 3s;">🌍 Africa</div>
-      <div class="skill-node" data-skill="UX" style="--x: 15%; --y: 50%; --delay: 4s;">⚡ UX</div>
-      <div class="skill-node" data-skill="Data" style="--x: 60%; --y: 85%; --delay: 5s;">📊 Data</div>
-      <svg class="constellation-lines" id="constellationLines">
-        <!-- Lines will be drawn dynamically -->
-      </svg>
+    <div class="hero-bottom fade-up-delay-2">
+      <p class="hero-desc">
+        AI-fluent product designer building tools that actually work — from fintech products serving thousands to solo-shipped AI tools. Currently co-founding Husridge and redesigning how Africa's creative industry connects talent to opportunity.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Years designing</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Products shipped</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">2</div>
+          <div class="stat-label">Startups co-founded</div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="hero-bottom fade-up fade-up-delay-2">
-    <p class="hero-desc">
-      AI-fluent product designer building tools that actually work — from fintech products serving thousands to solo-shipped AI tools. Currently co-founding Husridge and redesigning how Africa's creative industry connects talent to opportunity.
-    </p>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">4+</div>
-        <div class="stat-label">Years designing</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">6+</div>
-        <div class="stat-label">Products shipped</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">2</div>
-        <div class="stat-label">Startups co-founded</div>
+  <div class="hero-visual-container">
+    <!-- DYNAMIC HERO VISUAL -->
+    <div class="hero-visual fade-up-delay-2" id="heroVisual">
+      <div class="constellation-container">
+        <div class="skill-node" data-skill="Design" style="--x: 20%; --y: 25%; --delay: 0s;">🎨 Design</div>
+        <div class="skill-node" data-skill="AI" style="--x: 70%; --y: 15%; --delay: 1s;">🤖 AI</div>
+        <div class="skill-node" data-skill="Fintech" style="--x: 85%; --y: 60%; --delay: 2s;">💳 Fintech</div>
+        <div class="skill-node" data-skill="Africa" style="--x: 35%; --y: 75%; --delay: 3s;">🌍 Africa</div>
+        <div class="skill-node" data-skill="UX" style="--x: 15%; --y: 50%; --delay: 4s;">⚡ UX</div>
+        <div class="skill-node" data-skill="Data" style="--x: 60%; --y: 85%; --delay: 5s;">📊 Data</div>
+        <svg class="constellation-lines" id="constellationLines">
+          <!-- Lines will be drawn dynamically -->
+        </svg>
       </div>
     </div>
   </div>
@@ -1875,6 +2116,183 @@
         <li><strong>Thought Leadership</strong> @techwithtomiwa — AI's impact on Africa's workforce</li>
         <li><strong>Strategic Design</strong> From seed-funding evidence to investor presentations</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-label">Resume</div>
+  
+  <!-- Resume Header -->
+  <div class="resume-header fade-up">
+    <p>4+ years designing products across fintech, supply chain, civic tech, and AI — from Lagos.</p>
+    <a href="https://www.linkedin.com/in/promise-tomiwa-ayandele-50953b188/" target="_blank" class="resume-download-btn">
+      Download PDF →
+    </a>
+  </div>
+
+  <div class="resume-grid fade-up">
+    <!-- Left Column: Experience + Education -->
+    <div class="resume-left">
+      <!-- Experience -->
+      <div class="resume-section">
+        <h3 class="resume-section-title">Experience</h3>
+        
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <h4 class="resume-company">Payonus</h4>
+            <div class="resume-role">Product Designer</div>
+            <div class="resume-date">Current</div>
+          </div>
+          <ul class="resume-bullets">
+            <li>Designing cross-border payment flows enabling merchants and business owners to receive payments across 7 African countries from anywhere in the world</li>
+            <li>Led design of OnUs Tag Transfer — instant peer-to-peer payments via unique payment handle</li>
+            <li>Designing merchant dashboards, transaction state flows, and business account onboarding</li>
+            <li>Operating in a regulated fintech environment balancing compliance requirements with clean UX</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <h4 class="resume-company">Checkit Technologies / Proc360</h4>
+            <div class="resume-role">Product Designer</div>
+            <div class="resume-date">2023</div>
+          </div>
+          <ul class="resume-bullets">
+            <li>Solo designed the entire V2 of Proc360, a China-to-Africa procurement platform</li>
+            <li>Designed four interconnected modules: Buy For Me, Wallet, Store, Ship</li>
+            <li>Design work cited as a contributing factor in the company's seed funding round</li>
+            <li>Product serves 5,000+ businesses across Nigeria and Africa</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <h4 class="resume-company">Husridge</h4>
+            <div class="resume-role">Co-founder & Product Designer</div>
+            <div class="resume-date">2022–2024</div>
+          </div>
+          <ul class="resume-bullets">
+            <li>Co-founded a talent management and marketplace platform for Africa's creative industry</li>
+            <li>Designed full product from 0 to 1: onboarding, talent profiles, booking flows, client marketplace</li>
+            <li>Conducted stakeholder research with senior figures in African music talent management</li>
+            <li>Led product strategy and design as 50% equity co-founder</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <h4 class="resume-company">Estility PLC</h4>
+            <div class="resume-role">Product Designer</div>
+            <div class="resume-date">2022–2023</div>
+          </div>
+          <ul class="resume-bullets">
+            <li>First product design role — HR technology platform</li>
+            <li>Designed core HR product features and user flows</li>
+            <li>Foundation for domain expertise combining HR knowledge with product design</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Independent Projects -->
+      <div class="resume-section">
+        <h3 class="resume-section-title">Independent Projects</h3>
+        
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <h4 class="resume-company">UX Rival</h4>
+            <div class="resume-role">Solo Founder & Developer</div>
+            <div class="resume-date">2024–Present</div>
+          </div>
+          <ul class="resume-bullets">
+            <li>Solo built an AI-powered competitive UX analysis tool using Next.js and Google Gemini API</li>
+            <li>Designed and developed end-to-end — from concept to live product at uxrival.xyz</li>
+            <li>Demonstrates full product thinking: ideation, design, build, ship, distribute</li>
+          </ul>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <h4 class="resume-company">DRA2020 Redesign</h4>
+            <div class="resume-role">Lead Designer</div>
+            <div class="resume-date">2024–Present</div>
+          </div>
+          <ul class="resume-bullets">
+            <li>Lead designer on the redesign of Dave's Redistricting App — civic tech tool used by FiveThirtyEight and US state legislatures</li>
+            <li>Responsible for user research, IA, map drawing interface, and analysis dashboard redesign</li>
+            <li>In development</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="resume-section">
+        <h3 class="resume-section-title">Education</h3>
+        
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <h4 class="resume-company">Ahmadu Bello University</h4>
+            <div class="resume-role">MBA, Marketing</div>
+            <div class="resume-date">In Progress, Expected January 2027</div>
+          </div>
+        </div>
+
+        <div class="resume-item">
+          <div class="resume-item-header">
+            <h4 class="resume-company">Obafemi Awolowo University</h4>
+            <div class="resume-role">B.Sc. Educational Political Science</div>
+            <div class="resume-date">2016–2020</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Skills + Tools + Content -->
+    <div class="resume-right">
+      <!-- Skills -->
+      <div class="resume-section">
+        <h3 class="resume-section-title">Skills</h3>
+        <div class="resume-tags">
+          <span class="case-tag">Product Design</span>
+          <span class="case-tag">UX Research</span>
+          <span class="case-tag">Interaction Design</span>
+          <span class="case-tag">Information Architecture</span>
+          <span class="case-tag">Fintech Product Design</span>
+          <span class="case-tag">Payment Flows</span>
+          <span class="case-tag">Cross-border Finance UX</span>
+          <span class="case-tag">AI-assisted Product Development</span>
+          <span class="case-tag">Prompt Engineering</span>
+          <span class="case-tag">Design Systems</span>
+          <span class="case-tag">Component Libraries</span>
+          <span class="case-tag">Figma</span>
+          <span class="case-tag">FigJam</span>
+          <span class="case-tag">Prototyping</span>
+        </div>
+      </div>
+
+      <!-- Tools & Tech -->
+      <div class="resume-section">
+        <h3 class="resume-section-title">Tools & Tech</h3>
+        <div class="resume-tags">
+          <span class="case-tag">Figma (primary)</span>
+          <span class="case-tag">Next.js</span>
+          <span class="case-tag">Gemini API</span>
+          <span class="case-tag">Claude API</span>
+          <span class="case-tag">Vercel</span>
+          <span class="case-tag">GitHub</span>
+          <span class="case-tag">Framer</span>
+        </div>
+      </div>
+
+      <!-- Content & Thought Leadership -->
+      <div class="resume-section">
+        <h3 class="resume-section-title">Content & Thought Leadership</h3>
+        <div class="resume-content-item">
+          <div class="resume-content-title">@techwithtomiwa</div>
+          <div class="resume-content-desc">Product design and African innovation content across TikTok, Instagram Reels, YouTube Shorts, LinkedIn, and Substack</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -3097,6 +3515,115 @@
     el.addEventListener('mouseleave', function() { follower.classList.remove('hover'); });
   });
 
+  // HERO CONSTELLATION ANIMATION
+  function initHeroConstellation() {
+    const visual = document.getElementById('heroVisual');
+    if (!visual) return;
+    
+    const container = visual.querySelector('.constellation-container');
+    const svg = visual.querySelector('#constellationLines');
+    const nodes = visual.querySelectorAll('.skill-node');
+    
+    if (!container || !svg || nodes.length === 0) return;
+
+    // Set container size
+    const containerRect = container.getBoundingClientRect();
+    svg.setAttribute('width', containerRect.width);
+    svg.setAttribute('height', containerRect.height);
+
+    // Create path elements for lines
+    const paths = [];
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.classList.add('constellation-path');
+        svg.appendChild(path);
+        paths.push({ path, from: nodes[i], to: nodes[j] });
+      }
+    }
+
+    // Animate nodes
+    nodes.forEach((node, index) => {
+      const delay = parseFloat(node.style.getPropertyValue('--delay')) || index * 0.5;
+      setTimeout(() => {
+        node.classList.add('visible');
+      }, delay * 1000);
+    });
+
+    // Draw lines
+    function drawLines() {
+      paths.forEach(({ path, from, to }) => {
+        const fromRect = from.getBoundingClientRect();
+        const toRect = to.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        
+        const x1 = fromRect.left + fromRect.width / 2 - containerRect.left;
+        const y1 = fromRect.top + fromRect.height / 2 - containerRect.top;
+        const x2 = toRect.left + toRect.width / 2 - containerRect.left;
+        const y2 = toRect.top + toRect.height / 2 - containerRect.top;
+        
+        const d = `M ${x1} ${y1} L ${x2} ${y2}`;
+        path.setAttribute('d', d);
+      });
+    }
+
+    // Initial draw
+    setTimeout(drawLines, 500);
+
+    // Redraw on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        svg.setAttribute('width', containerRect.width);
+        svg.setAttribute('height', containerRect.height);
+        drawLines();
+      }, 150);
+    });
+
+    // Mouse interaction
+    let mouseX = 0, mouseY = 0;
+    let targetX = 0, targetY = 0;
+
+    container.addEventListener('mousemove', (e) => {
+      const rect = container.getBoundingClientRect();
+      mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+      mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+    });
+
+    container.addEventListener('mouseleave', () => {
+      mouseX = 0;
+      mouseY = 0;
+    });
+
+    function animateNodes() {
+      targetX += (mouseX - targetX) * 0.1;
+      targetY += (mouseY - targetY) * 0.1;
+
+      nodes.forEach(node => {
+        const baseX = parseFloat(node.style.getPropertyValue('--x')) / 100;
+        const baseY = parseFloat(node.style.getPropertyValue('--y')) / 100;
+        
+        const moveX = targetX * 10;
+        const moveY = targetY * 10;
+        
+        node.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+
+      drawLines();
+      requestAnimationFrame(animateNodes);
+    }
+
+    animateNodes();
+  }
+
+  // Initialize constellation when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroConstellation);
+  } else {
+    initHeroConstellation();
+  }
+
   // Dynamic Constellation
   function initConstellation() {
     const container = document.querySelector('.constellation-container');
@@ -3288,6 +3815,37 @@
   mobileNav.addEventListener('click', function(e) {
     if (e.target === mobileNav) {
       closeMobileMenu();
+    }
+  });
+
+  // Resume download functionality
+  function downloadResume() {
+    // Create a temporary link element
+    const link = document.createElement('a');
+    
+    // Set the href to the resume PDF file
+    link.href = './assets/Tomiwa_Ayandele_Resume.pdf';
+    
+    // Set the download attribute with a meaningful filename
+    link.download = 'Tomiwa_Ayandele_Resume.pdf';
+    
+    // Append to body, click, and remove
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Optional: Track download event (you can add analytics here)
+    console.log('Resume downloaded');
+  }
+
+  // Add event listener to resume download button
+  document.addEventListener('DOMContentLoaded', function() {
+    const resumeDownloadBtn = document.getElementById('resumeDownloadBtn');
+    if (resumeDownloadBtn) {
+      resumeDownloadBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        downloadResume();
+      });
     }
   });
 </script>
