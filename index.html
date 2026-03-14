@@ -177,17 +177,17 @@
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(8, 8, 6, 0.95);
-    backdrop-filter: blur(20px);
-    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    background: #080806;
+    z-index: 9999;
     display: flex;
     flex-direction: column;
-    padding: 80px 20px 40px;
+    justify-content: center;
+    align-items: center;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-100%);
+    transform: translateY(20px);
     transition: all 0.3s ease;
   }
 
@@ -231,14 +231,16 @@
 
   .mobile-nav-link {
     display: block;
-    padding: 16px 20px;
+    padding: 18px 24px;
     color: var(--text);
+    font-size: 22px;
+    font-family: var(--font-heading);
     text-decoration: none;
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    font-weight: 500;
-    border-radius: 8px;
+    text-align: center;
+    min-height: 56px;
+    line-height: 1.3;
     transition: all 0.2s ease;
+    width: 100%;
   }
 
   .mobile-nav-link:hover {
@@ -247,9 +249,12 @@
   }
 
   .mobile-nav-sublink {
-    padding-left: 40px;
-    font-size: 1rem;
+    padding-left: 48px;
+    font-size: 18px;
     color: var(--text-dim);
+    min-height: 48px;
+    display: flex;
+    align-items: center;
   }
 
   .mobile-nav-sublink:hover {
@@ -265,21 +270,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
-    background: transparent;
-    border: none;
+    padding: 18px 24px;
     color: var(--text);
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    font-weight: 500;
+    font-size: 22px;
+    font-family: var(--font-heading);
+    text-decoration: none;
+    text-align: center;
+    min-height: 56px;
+    background: none;
+    border: none;
     cursor: pointer;
-    border-radius: 8px;
     transition: all 0.2s ease;
   }
 
   .mobile-nav-dropdown-trigger:hover {
     background: rgba(212, 175, 83, 0.1);
-    color: var(--gold);
   }
 
   .mobile-nav-caret {
@@ -535,9 +540,10 @@
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     padding: 14px 0;
-    background: var(--surface);
     overflow: hidden;
     white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
   }
   .marquee-inner {
     display: inline-flex; gap: 60px;
@@ -1222,7 +1228,6 @@
     line-height: 1;
   }
   .philosophy-left blockquote em { color: var(--gold); font-style: normal; }
-  .philosophy-right { }
   .philosophy-right p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.85; margin-bottom: 18px; }
   .cv-link {
     display: inline-flex; align-items: center; gap: 10px;
@@ -1436,19 +1441,35 @@
       line-height: 1.7 !important;
     }
     
+    /* Hide desktop CTA on mobile */
+    .nav-cta {
+      display: none !important;
+    }
+
     /* Small text elements - minimum 13px */
     .case-tag,
     .cs-section-label,
     .screen-frame-name,
     .ba-url,
     .hero-tag,
-    .nav-cta,
     .marquee-inner,
     .section-label,
     .stat-label,
     .work-tag {
       font-size: 13px !important;
       min-height: auto !important;
+    }
+    
+    /* Storytelling section mobile */
+    #storytelling {
+      padding: 80px 20px !important;
+    }
+    #storytelling > div {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    #storytelling a[style*="display:flex"] {
+      padding: 16px !important;
     }
     
     /* Headings */
@@ -1562,12 +1583,14 @@
       height: 80px;
     }
 
-    /* Marquee */
     .marquee-strip {
       padding: 10px 0;
+      overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
     .marquee-inner {
-      font-size: 0.55rem;
+      font-size: 0.7rem;
       gap: 40px;
       animation-duration: 15s;
     }
@@ -2024,7 +2047,7 @@
       </li>
       <li><a href="#philosophy" class="mobile-nav-link">Thinking</a></li>
       <li><a href="#storytelling" class="mobile-nav-link">@techwithtomiwa</a></li>
-      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+      <li><a href="#contact" class="mobile-nav-link" style="color: var(--gold); font-weight: 600;">Let's talk →</a></li>
     </ul>
   </div>
 </nav>
@@ -2163,7 +2186,7 @@
             <li>Solo designed the entire V2 of Proc360, a China-to-Africa procurement platform</li>
             <li>Designed four interconnected modules: Buy For Me, Wallet, Store, Ship</li>
             <li>Design work cited as a contributing factor in the company's seed funding round</li>
-            <li>Product serves 5,000+ businesses across Nigeria and Africa</li>
+            <li>Product serves 5,000+ businesses across Africa</li>
           </ul>
         </div>
 
@@ -3290,7 +3313,7 @@
 
     <div class="cs-section">
       <div class="cs-section-label" style="color:#4ade80">Why This Project Matters <span class="cs-section-num">05</span></div>
-      <h4>A Nigerian designer. A US democracy tool. <em>The unexpected fit.</em></h4>
+      <h4>A designer. A US democracy tool. <em>The unexpected fit.</em></h4>
       <p>When I first took on this project, the obvious question was: why would someone be the right designer for a US redistricting tool? The answer is the same reason my political science degree is more useful than it sounds — I understand how political systems shape the lives of people who have no direct power over them. That's not an abstract concept for me. It's the context I grew up in.</p>
       <p>Redistricting is one of the most consequential and least visible forms of political power in the United States. The lines drawn on district maps determine who gets represented, whose voice gets diluted, and which communities get politically split in ways that prevent them from electing anyone who looks like them or shares their concerns. Designing the tool that empowers citizens to see and challenge those lines isn't just a design challenge — it's a civic responsibility.</p>
       <p>My background in geopolitics and political science didn't just give me domain empathy — it gave me a framework for understanding who the product is actually for. The most important users of DRA2020 aren't the political scientists. They're the citizens in communities who've been gerrymandered for decades and finally have a tool that lets them draw what fair looks like and show it to their commission. Everything I designed was built to serve that user first.</p>
@@ -3333,7 +3356,7 @@
         <ul style="list-style: none; padding: 0; margin: 16px 0 0 0;">
           <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Designed full product from 0 to 1 — onboarding flows, talent profiles, booking systems, and client marketplace</li>
           <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Built stakeholder relationships in music talent management, validating product-market fit</li>
-          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Conducted founder research identifying challenges in Nigeria's informal operating culture</li>
+          <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Conducted founder research identifying challenges in informal operating culture</li>
           <li style="margin-bottom: 8px; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Professionally exited after co-founder misalignment, preserving relationships and learning from the journey</li>
           <li style="margin-bottom: 0; font-size: 0.83rem; color: var(--text-dim); line-height: 1.75;">• Founder chapter: learned to build, sell, and lead a product in unstructured African markets</li>
         </ul>
