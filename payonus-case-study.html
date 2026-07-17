@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payonus Web App Redesign — Case Study · Promise Tomiwa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,600&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f8f6f1;
+  --bg-2: #f0ece5;
+  --bg-3: #e6e0d6;
+  --surface: #ffffff;
+  --text: #18160f;
+  --text-2: #5c5448;
+  --text-3: #9a9080;
+  --accent: #1e3550;
+  --accent-2: #2d4d73;
+  --border: #ddd8ce;
+  --font-display: 'Fraunces', serif;
+  --font-sans: 'Figtree', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 60px;
+  background: rgba(248,246,241,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.05rem; font-weight: 600;
+  color: var(--text); text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-back {
+  font-family: var(--font-sans);
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+.nav-back:hover { background: var(--bg-2); border-color: var(--accent); color: var(--text); }
+
+/* HERO */
+.hero {
+  padding: 140px 60px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 32px; height: 1px; background: var(--accent); opacity: 0.6;
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 400; line-height: 1.1;
+  color: var(--text); margin-bottom: 28px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero-desc {
+  font-size: 1.05rem; color: var(--text-2);
+  max-width: 600px; margin-bottom: 40px; line-height: 1.75;
+}
+.hero-meta {
+  display: flex; gap: 32px; flex-wrap: wrap;
+}
+.meta-item { display: flex; flex-direction: column; gap: 4px; }
+.meta-label {
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-3);
+}
+.meta-value { font-size: 0.88rem; color: var(--text-2); font-weight: 500; }
+
+/* DIVIDER */
+.hero-divider {
+  border: none; border-top: 1px solid var(--border);
+  margin: 0 60px;
+}
+
+/* BODY */
+.cs-body {
+  max-width: 900px; margin: 0 auto;
+  padding: 80px 60px 120px;
+}
+
+/* SECTIONS */
+.cs-section {
+  margin-bottom: 80px;
+  padding-bottom: 80px;
+  border-bottom: 1px solid var(--border);
+}
+.cs-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.cs-section-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cs-section-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem; font-weight: 300; font-style: italic;
+  color: var(--border); letter-spacing: -0.02em;
+}
+
+.cs-section h4 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 400; line-height: 1.2;
+  margin-bottom: 20px;
+}
+.cs-section h4 em { font-style: italic; color: var(--accent); }
+
+.cs-section p {
+  color: var(--text-2); margin-bottom: 16px;
+  font-size: 1rem; line-height: 1.8;
+}
+.cs-section p:last-child { margin-bottom: 0; }
+
+.cs-section h5 {
+  font-family: var(--font-sans);
+  font-size: 0.88rem; font-weight: 700;
+  color: var(--text); margin-bottom: 8px;
+}
+
+/* CARDS GRID */
+.cs-grid-2 {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 32px;
+}
+.cs-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 24px;
+}
+.cs-card-icon { font-size: 1.4rem; margin-bottom: 12px; }
+.cs-card h5 { margin-bottom: 8px; }
+.cs-card p { font-size: 0.9rem; color: var(--text-2); margin: 0; line-height: 1.65; }
+
+/* BEFORE / AFTER */
+.ba-section-head {
+  font-family: var(--font-sans);
+  font-size: 0.92rem; font-weight: 700;
+  color: var(--text); margin-top: 48px; margin-bottom: 20px;
+  padding-top: 24px; border-top: 1px solid var(--border);
+}
+.ba-section-head:first-of-type { border-top: none; padding-top: 0; margin-top: 32px; }
+
+/* Screenshot before/after grid */
+.ba-screens {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 20px;
+}
+.ba-screen-wrap { display: flex; flex-direction: column; gap: 10px; }
+.ba-screen-label {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+.ba-screen-label.before { color: var(--text-3); }
+.ba-screen-label.after { color: var(--accent); }
+
+.ba-screen-wrap img {
+  width: 100%; border-radius: 6px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+/* Single screenshot full-width */
+.ba-screen-single {
+  margin-bottom: 20px;
+}
+.ba-screen-single img {
+  width: 100%; border-radius: 6px;
+  border: 1px solid var(--border); display: block;
+}
+
+/* Three-up onboarding screenshots */
+.ba-screens-3 {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; margin-bottom: 20px;
+}
+.ba-screens-3 img {
+  width: 100%; border-radius: 6px;
+  border: 1px solid var(--border); display: block;
+}
+
+/* Annotation */
+.ba-annotation {
+  display: flex; gap: 16px;
+  background: var(--bg-2); border-left: 3px solid var(--accent);
+  padding: 16px 20px; border-radius: 0 4px 4px 0;
+  margin-top: 16px;
+}
+.ba-annotation-arrow {
+  font-family: var(--font-display); font-size: 1.1rem;
+  color: var(--accent); flex-shrink: 0;
+}
+.ba-annotation-text {
+  font-size: 0.88rem; color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* Before/After bullet lists */
+.ba-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0 0;
+}
+.ba-panel {
+  border: 1px solid var(--border); border-radius: 6px;
+  background: var(--surface); overflow: hidden;
+}
+.ba-panel-label {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.ba-panel-label.before { color: var(--text-3); background: var(--bg-2); }
+.ba-panel-label.after { color: var(--accent); background: rgba(30,53,80,0.04); }
+.ba-panel-content { padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.ba-item {
+  font-size: 0.875rem; line-height: 1.6;
+  padding: 8px 10px; border-radius: 4px;
+}
+.ba-item.problem {
+  color: var(--text-2); background: var(--bg);
+  border-left: 2px solid var(--bg-3);
+}
+.ba-item.solution {
+  color: var(--text); background: rgba(30,53,80,0.04);
+  border-left: 2px solid var(--accent);
+}
+
+/* OUTCOMES */
+.outcome-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 6px;
+  overflow: hidden; margin-top: 32px;
+}
+.outcome-item {
+  background: var(--surface); padding: 24px 20px;
+  text-align: center;
+}
+.outcome-num {
+  font-family: var(--font-display);
+  font-size: 2.2rem; font-weight: 300; font-style: italic;
+  color: var(--accent); line-height: 1; margin-bottom: 8px;
+}
+.outcome-label {
+  font-size: 0.78rem; color: var(--text-2);
+  line-height: 1.4;
+}
+
+/* BACK LINK */
+.back-wrap {
+  max-width: 900px; margin: 0 auto;
+  padding: 48px 60px 0;
+  display: flex;
+}
+.back-link {
+  font-size: 0.85rem; font-weight: 500;
+  color: var(--accent); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: gap 0.2s;
+}
+.back-link:hover { gap: 12px; }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .hero { padding: 110px 24px 60px; }
+  .hero-divider { margin: 0 24px; }
+  .cs-body { padding: 60px 24px 80px; }
+  .back-wrap { padding: 40px 24px 0; }
+  .ba-screens, .cs-grid-2, .ba-grid, .outcome-grid { grid-template-columns: 1fr; }
+  .ba-screens-3 { grid-template-columns: 1fr; }
+  .hero-meta { gap: 20px; }
+  .cs-section-num { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Promise <span>Tomiwa</span></a>
+  <a href="index.html#work" class="nav-back">← Back to Work</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Case Study · 01</div>
+  <h1>Payonus <em>Merchant</em><br />Web App Redesign</h1>
+  <p class="hero-desc">The original merchant dashboard was built by engineers to work — not to be understood. I led the first design-driven redesign of a live, CBN-regulated fintech platform: introducing hierarchy, grouping, progressive disclosure, and plain-language copy for the first time.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">Company</span>
+      <span class="meta-value">Payonus (CBN-licensed PSSP)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">First Designer · PM · Brand &amp; Biz Dev</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Year</span>
+      <span class="meta-value">2024 – 2025</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Scope</span>
+      <span class="meta-value">Dashboard · Onboarding · Transactions · Settlement</span>
+    </div>
+  </div>
+</div>
+
+<hr class="hero-divider" />
+
+<div class="cs-body">
+
+  <!-- 01 Overview -->
+  <div class="cs-section">
+    <div class="cs-section-label">Overview <span class="cs-section-num">01</span></div>
+    <h4>Introducing design discipline to a <em>live regulated fintech.</em></h4>
+    <p>Payonus is a CBN-licensed pan-African B2B fintech PSSP. The merchant-facing web app — dashboard, wallets, settlement, onboarding — was originally built without a dedicated designer. The engineering team built exactly what was functionally needed, screen by screen, with no one owning the experience as a whole.</p>
+    <p>I led the first design-driven redesign of the product. This case study covers that work — the full merchant web app overhaul. My other design work at Payonus (checkout flows, OnUs Tag Transfer, cross-border payment UX) is covered separately in the Experience section.</p>
+    <div class="cs-grid-2" style="margin-top:28px">
+      <div class="cs-card">
+        <div class="cs-card-icon">🎯</div>
+        <h5>My role</h5>
+        <p>First dedicated designer on the product. Owned research, IA, visual design, and handoff — alongside my broader PM, brand, and business development responsibilities at Payonus.</p>
+      </div>
+      <div class="cs-card">
+        <div class="cs-card-icon">⚖️</div>
+        <h5>Context</h5>
+        <p>Live regulated product. Every change had to work within CBN compliance constraints while improving merchant comprehension and trust. No design system existed before I arrived.</p>
+      </div>
+    </div>
+
+    <div class="outcome-grid" style="margin-top:40px">
+      <div class="outcome-item">
+        <div class="outcome-num">4</div>
+        <div class="outcome-label">Core flows redesigned</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-num">3</div>
+        <div class="outcome-label">Stat cards replacing one flat summary</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-num">1st</div>
+        <div class="outcome-label">Dedicated designer on the product</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 The Problem -->
+  <div class="cs-section">
+    <div class="cs-section-label">The Problem <span class="cs-section-num">02</span></div>
+    <h4>Built to <em>work.</em> Not to be understood.</h4>
+    <p>The original merchant dashboard led with a single flat "Transaction Summary" card — one large number, a row of dropdown filters, and no indication of what that number meant or what the merchant should do next. Wallet balances and settlement information lived on separate screens, so understanding "how much money can I actually move right now" meant navigating away from the dashboard entirely.</p>
+    <p>Transaction details had the same problem at a smaller scale. The detail modal listed every field — transaction ID, status, amount, channel, business name — at identical visual weight, in a single unbroken list. Finding one specific value meant reading the whole thing.</p>
+    <p>Settlement splitting, where merchants configure how incoming settlements divide across bank accounts, was a bare form: select a bank, enter an account name and number, enter a percentage. There was no way to see at a glance how much of the settlement was already allocated, how much remained, or whether a configuration was even active.</p>
+    <p>Onboarding compounded it. The original signup form put name, phone number, email, merchant type, and two password fields on one dense, unbroken screen — no progressive disclosure, no sense of how many steps remained.</p>
+    <p>None of this was a failure of engineering. It was the natural result of building a regulated fintech product with no one responsible for how it felt to use.</p>
+  </div>
+
+  <!-- 03 Feature Deep Dive -->
+  <div class="cs-section">
+    <div class="cs-section-label">Feature Deep Dive <span class="cs-section-num">03</span></div>
+    <h4>Four before/after decisions — and <em>why each one matters.</em></h4>
+
+    <!-- 1. Onboarding -->
+    <div class="ba-section-head">1 — Onboarding Flow</div>
+
+    <div class="ba-screen-single">
+      <div class="ba-screen-label before" style="margin-bottom:8px">Before — single-screen sign-up</div>
+      <img src="assets/payonus/before-signup.png" alt="Original Payonus signup form — all fields on one dense screen" loading="lazy" />
+    </div>
+
+    <div class="ba-screens-3">
+      <div>
+        <div class="ba-screen-label after" style="margin-bottom:8px">After — Step 1: Choose type</div>
+        <img src="assets/payonus/after-onboarding-type.png" alt="New onboarding: Choose Merchant Type screen" loading="lazy" />
+      </div>
+      <div>
+        <div class="ba-screen-label after" style="margin-bottom:8px">After — Step 2: Identity details</div>
+        <img src="assets/payonus/after-onboarding-details.png" alt="New onboarding: Let's get to know you screen" loading="lazy" />
+      </div>
+      <div>
+        <div class="ba-screen-label after" style="margin-bottom:8px">After — Step 3: Terms</div>
+        <img src="assets/payonus/after-onboarding-terms.png" alt="New onboarding: Terms and Conditions screen" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="ba-grid">
+      <div class="ba-panel">
+        <div class="ba-panel-label before">Before</div>
+        <div class="ba-panel-content">
+          <div class="ba-item problem">One dense screen: name, phone, email, merchant type, and two password fields at once</div>
+          <div class="ba-item problem">No progressive disclosure — all cognitive load front-loaded</div>
+          <div class="ba-item problem">No sense of how many steps remained or how close completion was</div>
+        </div>
+      </div>
+      <div class="ba-panel">
+        <div class="ba-panel-label after">After</div>
+        <div class="ba-panel-content">
+          <div class="ba-item solution">Three-step flow: merchant type selection → identity details → terms and conditions</div>
+          <div class="ba-item solution">Visible progress indicator — merchants always know where they are</div>
+          <div class="ba-item solution">No single screen asks for more than it needs to</div>
+        </div>
+      </div>
+    </div>
+    <div class="ba-annotation">
+      <div class="ba-annotation-arrow">→</div>
+      <div class="ba-annotation-text">Progressive disclosure is table stakes for fintech onboarding, but it's often skipped when engineers build forms without a designer. The stepped flow reduces abandonment by framing each screen as a small commitment rather than one large ask.</div>
+    </div>
+
+    <!-- 2. Dashboard -->
+    <div class="ba-section-head">2 — Dashboard</div>
+
+    <div class="ba-screens">
+      <div class="ba-screen-wrap">
+        <div class="ba-screen-label before">Before — flat Transaction Summary</div>
+        <img src="assets/payonus/before-dashboard.png" alt="Original dashboard: single Transaction Summary card" loading="lazy" />
+      </div>
+      <div class="ba-screen-wrap">
+        <div class="ba-screen-label after">After — three purpose-built stat cards</div>
+        <img src="assets/payonus/after-dashboard.png" alt="Redesigned dashboard: Total Payin, Payouts, and Wallet Funding cards" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="ba-screens" style="margin-top:12px">
+      <div class="ba-screen-wrap">
+        <div class="ba-screen-label before">Before — alternate view</div>
+        <img src="assets/payonus/before-dashboard-2.png" alt="Original dashboard alternate view" loading="lazy" />
+      </div>
+      <div class="ba-screen-wrap">
+        <div class="ba-screen-label after">After — wallet and settlement cards</div>
+        <img src="assets/payonus/after-dashboard-2.png" alt="Redesigned dashboard showing Payonus Account and Settlement Account cards" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="ba-grid" style="margin-top:20px">
+      <div class="ba-panel">
+        <div class="ba-panel-label before">Before</div>
+        <div class="ba-panel-content">
+          <div class="ba-item problem">Single "Transaction Summary" card — one number, no context</div>
+          <div class="ba-item problem">Four filter dropdowns as the primary navigation aid</div>
+          <div class="ba-item problem">Wallet and settlement balances on separate screens</div>
+          <div class="ba-item problem">No indication of pending or failed transactions</div>
+        </div>
+      </div>
+      <div class="ba-panel">
+        <div class="ba-panel-label after">After</div>
+        <div class="ba-panel-content">
+          <div class="ba-item solution">Three purpose-built stat cards: Total Payin, Total Payouts, Total Wallet Funding — each with its own pending/failed breakdown</div>
+          <div class="ba-item solution">Dedicated Payonus Account and Settlement Account cards with plain-language copy</div>
+          <div class="ba-item solution">Full financial position visible on arrival — no navigation required</div>
+        </div>
+      </div>
+    </div>
+    <div class="ba-annotation">
+      <div class="ba-annotation-arrow">→</div>
+      <div class="ba-annotation-text">The split into three named cards matches the three distinct money states a merchant actually cares about: what came in, what went out, and what's sitting in the wallet. The plain-language copy on the account cards removes a class of support questions entirely.</div>
+    </div>
+
+    <!-- 3. Transaction Detail -->
+    <div class="ba-section-head">3 — Transaction Detail Modal</div>
+
+    <div class="ba-screens">
+      <div class="ba-screen-wrap">
+        <div class="ba-screen-label before">Before — flat field list</div>
+        <img src="assets/payonus/before-transaction-modal.png" alt="Original transaction detail modal — all fields at equal weight" loading="lazy" />
+      </div>
+      <div class="ba-screen-wrap">
+        <div class="ba-screen-label after">After — grouped sections + slide panel</div>
+        <img src="assets/payonus/after-transaction-details.png" alt="Redesigned transaction detail panel — grouped sections, colour status, copy buttons" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="ba-grid" style="margin-top:20px">
+      <div class="ba-panel">
+        <div class="ba-panel-label before">Before</div>
+        <div class="ba-panel-content">
+          <div class="ba-item problem">All fields at identical visual weight in a single unbroken list</div>
+          <div class="ba-item problem">Status shown as plain text, no colour signal</div>
+          <div class="ba-item problem">No copy-to-clipboard on IDs</div>
+        </div>
+      </div>
+      <div class="ba-panel">
+        <div class="ba-panel-label after">After</div>
+        <div class="ba-panel-content">
+          <div class="ba-item solution">Grouped into named sections: Transaction Info, Payment Details, Business Info, Reference</div>
+          <div class="ba-item solution">Status shown as a colour-coded pill (SUCCESSFUL = green, FAILED = red)</div>
+          <div class="ba-item solution">Every ID given one-tap copy — critical for reconciliation and support tickets</div>
+        </div>
+      </div>
+    </div>
+    <div class="ba-annotation">
+      <div class="ba-annotation-arrow">→</div>
+      <div class="ba-annotation-text">Grouping transforms a reference document into a scanning surface. A merchant chasing a specific settlement reference shouldn't need to read 12 fields to find it. The copy buttons address a real pain point: merchants regularly paste transaction IDs into reconciliation spreadsheets or support channels.</div>
+    </div>
+
+    <!-- 4. Settlement Splitting -->
+    <div class="ba-section-head">4 — Settlement Splitting</div>
+
+    <div class="ba-screens">
+      <div class="ba-screen-wrap">
+        <div class="ba-screen-label before">Before — bare form</div>
+        <img src="assets/payonus/before-settlement.png" alt="Original settlement splitting — bare form with no allocation visibility" loading="lazy" />
+      </div>
+      <div class="ba-screen-wrap">
+        <div class="ba-screen-label after">After — stat row + allocation view</div>
+        <img src="assets/payonus/after-settlement.png" alt="Redesigned settlement: stat cards showing Total Allocated, Remaining, Active Splits, Status" loading="lazy" />
+      </div>
+    </div>
+
+    <div class="ba-grid" style="margin-top:20px">
+      <div class="ba-panel">
+        <div class="ba-panel-label before">Before</div>
+        <div class="ba-panel-content">
+          <div class="ba-item problem">Bare form: select bank, enter account name, enter number, enter percentage</div>
+          <div class="ba-item problem">No state visibility — no way to see what was already allocated</div>
+          <div class="ba-item problem">Merchants had to reconstruct the allocation picture manually</div>
+        </div>
+      </div>
+      <div class="ba-panel">
+        <div class="ba-panel-label after">After</div>
+        <div class="ba-panel-content">
+          <div class="ba-item solution">Stat row at top: Total Allocated, Remaining, Active Splits, Status</div>
+          <div class="ba-item solution">Merchant sees configuration health before opening the form</div>
+          <div class="ba-item solution">Remaining % and active count shown at a glance — no manual arithmetic</div>
+        </div>
+      </div>
+    </div>
+    <div class="ba-annotation">
+      <div class="ba-annotation-arrow">→</div>
+      <div class="ba-annotation-text">The stat cards answer the question every merchant asks before editing their split: "Is this already set up correctly?" The old interface forced them to read the full table to reconstruct that picture. The new one surfaces it immediately.</div>
+    </div>
+  </div>
+
+  <!-- 04 Beyond the Screens -->
+  <div class="cs-section">
+    <div class="cs-section-label">Beyond the Screens <span class="cs-section-num">04</span></div>
+    <h4>Product ownership, not just <em>interface design.</em></h4>
+    <p>My work at Payonus extends well beyond the merchant web app redesign. The most significant example is the CEMCS cooperative banking proposal — a self-service cooperative wallet platform with real NUBAN accounts, pitched to enterprise decision-makers as a B2B partnership opportunity for Payonus.</p>
+    <div class="cs-grid-2" style="margin-top:24px">
+      <div class="cs-card">
+        <div class="cs-card-icon">📋</div>
+        <h5>Enterprise proposal process</h5>
+        <p>Led multiple rounds of executive stakeholder revisions, producing PRD and PRS documentation, Q&amp;A prep materials for C-suite sessions, strategic memos on fee allocation and withdrawal thresholds, and go-to-market strategy for the cooperative banking product.</p>
+      </div>
+      <div class="cs-card">
+        <div class="cs-card-icon">🎯</div>
+        <h5>End-to-end product ownership</h5>
+        <p>Requirements gathering, executive stakeholder management, cross-functional documentation — not just interface design. Product management work delivered without a formal PM title, reporting directly to the CTO with expanded scope.</p>
+      </div>
+      <div class="cs-card">
+        <div class="cs-card-icon">📊</div>
+        <h5>Q3 OKR framework</h5>
+        <p>Built the product organisation's OKR framework for Q3 — defining objectives, key results, and success metrics for the team. The first time structured goal-setting was formalised across the product function.</p>
+      </div>
+      <div class="cs-card">
+        <div class="cs-card-icon">🌍</div>
+        <h5>Brand &amp; business development</h5>
+        <p>Informally carrying brand, marketing, and business development leadership following a manager departure — managing an external content strategist engagement and supervising a marketing intern alongside design and PM responsibilities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 Impact & Reflection -->
+  <div class="cs-section">
+    <div class="cs-section-label">Impact &amp; Reflection <span class="cs-section-num">05</span></div>
+    <h4>Introducing a discipline, not <em>refining one.</em></h4>
+    <p>This project was different from every other redesign in my portfolio because there was no prior design to refine. The work wasn't about improving an existing design system — it was about introducing the discipline itself: hierarchy, grouping, plain language, progressive disclosure, to a live regulated fintech product for the first time.</p>
+    <p>The most important outcome isn't any individual screen. It's that merchants now have a product that respects their intelligence, surfaces what they need to know without making them search for it, and uses language that explains rather than assumes. That's what a first designer on a product actually ships — not a redesign, but a standard.</p>
+    <div class="cs-grid-2" style="margin-top:24px">
+      <div class="cs-card">
+        <div class="cs-card-icon">🔑</div>
+        <h5>What I learned</h5>
+        <p>Designing for a regulated fintech without a design system forces you to be precise about every decision. Every component choice has to carry its own weight — there's no shared vocabulary to lean on. That constraint made me a better, more deliberate designer.</p>
+      </div>
+      <div class="cs-card">
+        <div class="cs-card-icon">⚡</div>
+        <h5>What this proves</h5>
+        <p>I can operate effectively in environments where product management, design, and business development responsibilities overlap — and where there's no existing structure to inherit. I build the structure, not just the screens.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="back-wrap">
+  <a href="index.html#work" class="back-link">← Back to all work</a>
+</div>
+
+<div style="height:80px"></div>
+
+</body>
+</html>
